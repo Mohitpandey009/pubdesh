@@ -41,5 +41,41 @@ class Admin_model extends CI_Model
         return $this->db->delete('publisherdata');
     }
 
+    public function add_property($data)
+    {
+        return $this->db->insert('publisher_property', $data);
+    }
+
+    public function getall_property()
+    {
+        $query = $this->db->get('publisher_property');
+        return $query->result_array();
+    }
+
+    public function get_approved_publisher()
+    {
+        $this->db->select('user_id');
+        $this->db->where('approved', 1);
+        $query = $this->db->get('publisherdata');
+        return $query->result_array();
+    }
+
+
+    public function savedomaindata($data)
+    {
+        return $this->db->insert('publisher_domain', $data);
+    }
+
+    public function getdomaindata()
+    {
+        $sql = "SELECT pp.PROP_id, pp.property, pd.domain_id, pd.pub_id, pd.domain
+                FROM publisher_property AS pp
+                JOIN publisher_domain AS pd ON pp.PROP_id = pd.prop_id;";
+
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+
 }
 ?>

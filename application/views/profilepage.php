@@ -37,10 +37,12 @@
 </head>
 
 <body>
+
     <div class="wrapper">
-<!-- include the slider start -->
-       <?php include'common/adminslider/adminslider.php'; ?>
-<!-- include the slider end -->
+
+        <!-- Sidebar -->
+        <?php include 'common/userslider/sideslider.php'; ?>
+        <!-- End Sidebar -->
 
         <div class="main-panel">
             <div class="main-header">
@@ -48,8 +50,8 @@
                     <!-- Logo Header -->
                     <div class="logo-header" data-background-color="dark">
                         <a href="index.html" class="logo">
-                            <img src="<?php echo base_url('assets/img/kaiadmin/logo_light.svg') ?>" alt="navbar brand"
-                                class="navbar-brand" height="20" />
+                            <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
+                                height="20" />
                         </a>
                         <div class="nav-toggle">
                             <button class="btn btn-toggle toggle-sidebar">
@@ -68,8 +70,13 @@
                 <!-- Navbar Header -->
                 <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
                     <div class="container-fluid">
-
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                            <li class="nav-item topbar-icon hidden-caret">
+                                <a class="nav-link bank-button"
+                                    href="<?php echo base_url('pubroute_controller/bank') ?>" aria-expanded="false">
+                                    <i class="fas fa-university"></i>
+                                </a>
+                            </li>
                             <li class="nav-item topbar-user dropdown hidden-caret">
                                 <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
                                     aria-expanded="false">
@@ -92,15 +99,15 @@
                                                 </div>
                                                 <div class="u-text">
                                                     <h4>Hizrian</h4>
-                                                    <p class="text-muted">hello@example.com</p>
-                                                    <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View
-                                                        Profile</a>
+                                                    <p class="text-muted">ID = 1234567</p>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Account Setting</a>
+                                            <a class="dropdown-item"
+                                                href="<?php echo base_url('pubroute_controller/profile/') ?>">View
+                                                Profile</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Logout</a>
                                         </li>
@@ -112,75 +119,101 @@
                 </nav>
                 <!-- End Navbar -->
             </div>
-
-            <div class="container">
-                <div class="form">
-                    <form action="<?php echo base_url('Admin_conroller/createproperty')?>" method="post" style="display:flex; margin:40px 0px;">
-                        <div class="form-group" style="width:40%">
-                            <input type="text" name="property"  placeholder="Create Property" required>
+            <div class="container mainprofilepage">
+            <?php
+                    if ($this->session->flashdata('error')) {
+                        echo '<div class="alert alert-danger passwordalert">' . $this->session->flashdata('error') . '</div>';
+                    }
+                    if ($this->session->flashdata('success')) {
+                        echo '<div class="alert alert-successnote">' . $this->session->flashdata('success') . '</div>';
+                    }
+                    ?>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="userprofile">
+                            <img src="<?php echo base_url('assets/img/profile.jpg') ?>" alt="image profile"
+                                class="profileimg rounded" />
                         </div>
-
-                        <div class="form-group">
-                            <button class="btn btn-primary" style="padding:9px 17px; ">Create</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="Domandata" style="text-align:center;">
-                <h1>All Properties</h1>
-            </div>
-          
-            <table style="width:98%; margin:auto;">
-                <tr>
-                    <th>ID</th>
-                    <th>Properties</th>
-                </tr>
-                <?php foreach($allproperty as $data){?>
-                <tr>
-                    <td><?=$data['s_no']?></td>
-                    <td><?=$data['property']?></td>
-                    
-                </tr>
-                <?php } ?>
-            </table>
-            </div>
-            
-
-
-            <footer class="footer">
-                <div class="container-fluid d-flex justify-content-between">
-                    <nav class="pull-left">
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="http://www.themekita.com">
-                                    ThemeKita
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"> Help </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"> Licenses </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div class="copyright">
-                        2024, made with <i class="fa fa-heart heart text-danger"></i> by
-                        <a href="http://www.themekita.com">ThemeKita</a>
                     </div>
-                    <div>
-                        Distributed by
-                        <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
+
+
+
+                    <div class="col-lg-8">
+                        <h1 class="userheading">User Profile</h1>
+                        <div class="userdetails">
+                            <p>Name: <?= $user_data['name'] ?></p>
+                            <p>Email: <?= $user_data['email'] ?></p>
+                            <p>Phone No: <?= $user_data['number'] ?></p>
+                            <p>Publisher ID: <?= $user_data['user_id'] ?></p>
+                            <button id="changePasswordBtn">Change Password</button>
+                        </div>
                     </div>
                 </div>
-            </footer>
+            </div>
         </div>
 
-        <!-- Custom template | don't include it in your project! -->
+        <!-- Password Change Popup -->
+        <div id="passwordChangePopup"
+            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center;">
+            <div class="popup-content"
+                style="background: white; padding: 20px; border-radius: 10px; position: relative;">
+                <span class="close" style="position: absolute; top: 10px; right: 10px; cursor: pointer;">&times;</span>
 
-        <!-- End Custom template -->
+                <!-- reset password start -->
+                <form id="" action="<?= base_url('User_controller/reset_password') ?>" method="post">
+                    <div class="form-group"> 
+                        <label for="oldPassword">Old Password:</label>
+                        <input type="password" id="oldPassword" class="form-control" name="oldPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password:</label>
+                        <input type="password" id="newPassword" class="form-control" name="newPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="submit_btn">Change Password</button>
+                </form>
+
+                <!-- reset password start -->
+
+            </div>
+        </div>
+
     </div>
-    </div>
-   
+    <!-- jQuery should be included before other scripts -->
+    <script src="<?php echo base_url('assets/js/core/jquery-3.7.1.min.js') ?>"></script>
+
+    <!-- script for reset password -->
+
+
+    <script>
+        var changePasswordBtn = document.getElementById("changePasswordBtn");
+        var passwordChangePopup = document.getElementById("passwordChangePopup");
+        var popupClose = document.querySelector(".close");
+        var passwordChangeForm = document.getElementById("passwordChangeForm");
+
+        changePasswordBtn.onclick = function () {
+            passwordChangePopup.style.display = "flex";
+        }
+
+        popupClose.onclick = function () {
+            passwordChangePopup.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == passwordChangePopup) {
+                passwordChangePopup.style.display = "none";
+            }
+        }
+
+        passwordChangeForm.onsubmit = function (event) {
+            event.preventDefault();
+            var oldPassword = document.getElementById("oldPassword").value;
+            var newPassword = document.getElementById("newPassword").value;
+
+            passwordChangePopup.style.display = "none";
+            passwordChangeForm.reset();
+        }
+    </script>
+
 </body>
 
 </html>

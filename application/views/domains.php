@@ -40,9 +40,9 @@
 
     <div class="wrapper">
 
-<!-- include the slider start -->
-        <?php include'common/adminslider/adminslider.php'; ?>
-<!-- include the slider end -->
+        <!-- include the slider start -->
+        <?php include 'common/userslider/sideslider.php'; ?>
+        <!-- include the slider end -->
 
         <div class="main-panel">
             <div class="main-header">
@@ -125,22 +125,27 @@
                 <div class="Domandata" style="text-align:center;">
                     <h1>Domain Data</h1>
                 </div>
-                <table style="width:98%; margin:auto;">
-                    <tr>
-                        <th>ID</th>
-                        <th>Domain</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>1. example.com</td>
-
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>anotherdomain.com</td>
-                    </tr>
-                </table>
+                <?php if (!empty($domain)): ?>
+                    <table style="width:98%; margin:auto;">
+                        <tr>
+                            <th>ID</th>
+                            <th>Domain</th>
+                        </tr>
+                        <?php $index = 1; ?>
+                        <?php foreach ($domain as $d): ?>
+                            <tr>
+                                <td><?php echo $index; ?></td>
+                                <td><?php echo $d->domain; ?></td>
+                                <!-- Add other fields as needed -->
+                            </tr>
+                            <?php $index++; ?>
+                        <?php endforeach; ?>
+                    </table>
+                <?php else: ?>
+                    <p>No domains found.</p>
+                <?php endif; ?>
             </div>
+
         </div>
 
         <!-- Bootstrap JS and dependencies -->

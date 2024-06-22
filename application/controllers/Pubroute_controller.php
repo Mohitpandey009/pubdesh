@@ -41,13 +41,6 @@ class Pubroute_controller extends CI_Controller {
     }
 
 
-    public function publisherdata(){
-        $this->load->model('Admin_model');
-        $data['publisherdata']=$this->Admin_model->getpublisherdata();
-        $this->load->view('allpublisherdata',$data);
-    }
-
-
     public function bankdetails() {
         $user_id = $this->session->userdata('user_id');
         $data['userbank'] = $this->User_model->is_user_id_exists($user_id);
@@ -65,15 +58,29 @@ class Pubroute_controller extends CI_Controller {
     
 
      public function asigndomain(){
-        $this->load->view('asigndomain');
+        $this->load->model('Admin_model');
+        $data['domain']=$this->Admin_model->getdomaindata();
+        $data['publiser']=$this->Admin_model->get_approved_publisher();
+        $data['prop_id']=$this->Admin_model->getall_property();
+        $this->load->view('asigndomain',$data);
     }
 
     public function property(){
-        $this->load->view('createproperty');
+        $this->load->model('Admin_model');
+        $data['allproperty'] = $this->Admin_model->getall_property();
+        $this->load->view('createproperty',$data);
     }
 
     public function domains(){
-        $this->load->view('domains');
+        $user_id = $this->session->userdata('user_id');
+        $data['domain']= $this->User_model->pub_domain_data($user_id);
+        $this->load->view('domains',$data);
+    }
+    
+    public function profile(){
+        $user_id = $this->session->userdata('user_id');
+        $data['user_data'] = $this->User_model->find_user_by_id($user_id);
+        $this->load->view('profilepage',$data);
     }
 
  }

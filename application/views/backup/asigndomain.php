@@ -97,54 +97,30 @@
                     <h1>Domain Data</h1>
                 </div>
                 <table style="width:98%; margin:auto;">
-                <tr>
-            <th>Publisher ID</th>
-            <th>Property</th>
-            <th>Domains</th>
-        </tr>
-        <?php
-        // Assuming $domain contains the fetched data including pub_id, PROP_id, domain_id, and domain
+                    <tr>
+                        <th>ID</th>
+                        <th>Publisher ID</th>
+                        <th>Property</th>
+                        <th>Domain</th>
+                    </tr>
 
-        // Group data by pub_id and property
-        $groupedData = [];
-        foreach ($domain as $row) {
-            $pub_id = $row['pub_id'];
-            $property = $row['property'];
-
-            if (!isset($groupedData[$pub_id])) {
-                $groupedData[$pub_id] = [];
-            }
-
-            if (!isset($groupedData[$pub_id][$property])) {
-                $groupedData[$pub_id][$property] = [];
-            }
-
-            $groupedData[$pub_id][$property][] = $row['domain'];
-        }
-
-        // Print the table
-        foreach ($groupedData as $pub_id => $properties) {
-            $pub_id_rowspan = count($properties);
-            $firstProperty = true;
-
-            foreach ($properties as $property => $domains) {
-                ?>
-                <tr>
-                    <?php if ($firstProperty) : ?>
-                        <td rowspan="<?= $pub_id_rowspan ?>"><?= htmlspecialchars($pub_id) ?></td>
-                        <?php $firstProperty = false; ?>
-                    <?php endif; ?>
-                    <td><?= htmlspecialchars($property) ?></td>
-                    <td>
-                        <?php foreach ($domains as $domain) : ?>
-                            <?= htmlspecialchars($domain) ?><br>
-                        <?php endforeach; ?>
-                    </td>
-                </tr>
-                <?php
-            }
-        }
-        ?>
+                    <tr>
+                        <td>1</td>
+                        <td>publisher123</td>
+                        <td>1. example,</td>
+                        <td>1. example.com,<br>2. anotherdomain.com,<br> 3. viral.com</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td> example</td>
+                        <td>1. example.com,<br>2. anotherdomain.com,<br> 3. viral.com</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>publisher456</td>
+                        <td>anotherdomain.com</td>
+                    </tr>
                 </table>
             </div>
 
