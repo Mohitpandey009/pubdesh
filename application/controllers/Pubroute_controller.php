@@ -6,6 +6,8 @@ class Pubroute_controller extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->model('User_model');
+        $this->load->model('Admin_model');
+        // $this->load->library('encryption');
     }
 
     // Load the login view
@@ -40,7 +42,6 @@ class Pubroute_controller extends CI_Controller {
         $this->load->view('panding_requests',$data);
     }
 
-
     public function bankdetails() {
         $user_id = $this->session->userdata('user_id');
         $data['userbank'] = $this->User_model->is_user_id_exists($user_id);
@@ -56,7 +57,6 @@ class Pubroute_controller extends CI_Controller {
         }
     }
     
-
      public function asigndomain(){
         $this->load->model('Admin_model');
         $data['domain']=$this->Admin_model->getdomaindata();
@@ -73,7 +73,9 @@ class Pubroute_controller extends CI_Controller {
 
     public function domains(){
         $user_id = $this->session->userdata('user_id');
-        $data['domain']= $this->User_model->pub_domain_data($user_id);
+        // $data['domain']= $this->User_model->pub_domain_data($user_id);
+        $data['domain']= $this->User_model->get_data_by_pub_id($user_id);
+        $this->load->view('common/userslider/sideslider',$data);
         $this->load->view('domains',$data);
     }
     
@@ -81,6 +83,18 @@ class Pubroute_controller extends CI_Controller {
         $user_id = $this->session->userdata('user_id');
         $data['user_data'] = $this->User_model->find_user_by_id($user_id);
         $this->load->view('profilepage',$data);
+    }
+
+    public function adminpayments(){
+        $data['approve']=$this->Admin_model->get_approved_publisher();
+        $this->load->view('adminpayments',$data);
+    }
+
+    public function userpayments(){
+        $pub_id = $this->session->userdata('user_id');
+        $data['publisher_earn']=$this->User_model->get_publisher_earnings_and_revenue($pub_id);
+
+        $this->load->view('userpayments',$data);
     }
 
  }

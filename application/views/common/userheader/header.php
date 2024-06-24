@@ -58,9 +58,9 @@
                             </li>
                             <li>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">View Profile</a>
+                                <a class="dropdown-item" href="<?=base_url('pubroute_controller/profile')?> ">View Profile</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <a class="dropdown-item" href="<?=base_url('User_controller/logout')?>">Logout</a>
                             </li>
                         </div>
                     </ul>

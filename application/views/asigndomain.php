@@ -67,7 +67,7 @@
                                     <option value="<?= $pub_id['user_id'] ?>"><?= $pub_id['user_id'] ?></option>
                                 <?php } ?>
                             </select>
-                            
+
                         </div>
 
                         <div class="form-group">
@@ -79,13 +79,13 @@
                                 <?php } ?>
 
                             </select>
-                           
+
                         </div>
 
                         <div class="form-group">
                             <label for="asigndomain">Asign Domain :</label>
                             <input type="text" id="asigndomain" name="asigndomain" required>
-                           
+
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-create">Create</button>
@@ -97,84 +97,60 @@
                     <h1>Domain Data</h1>
                 </div>
                 <table style="width:98%; margin:auto;">
-                <tr>
-            <th>Publisher ID</th>
-            <th>Property</th>
-            <th>Domains</th>
-        </tr>
-        <?php
-        // Assuming $domain contains the fetched data including pub_id, PROP_id, domain_id, and domain
+                    <tr>
+                        <th>Publisher ID</th>
+                        <th>Property</th>
+                        <th>Domains</th>
+                    </tr>
+                    <?php
+                    // Assuming $domain contains the fetched data including pub_id, PROP_id, domain_id, and domain
+                    
+                    // Group data by pub_id and property
+                    $groupedData = [];
+                    foreach ($domain as $row) {
+                        $pub_id = $row['pub_id'];
+                        $property = $row['property'];
 
-        // Group data by pub_id and property
-        $groupedData = [];
-        foreach ($domain as $row) {
-            $pub_id = $row['pub_id'];
-            $property = $row['property'];
+                        if (!isset($groupedData[$pub_id])) {
+                            $groupedData[$pub_id] = [];
+                        }
 
-            if (!isset($groupedData[$pub_id])) {
-                $groupedData[$pub_id] = [];
-            }
+                        if (!isset($groupedData[$pub_id][$property])) {
+                            $groupedData[$pub_id][$property] = [];
+                        }
 
-            if (!isset($groupedData[$pub_id][$property])) {
-                $groupedData[$pub_id][$property] = [];
-            }
+                        $groupedData[$pub_id][$property][] = $row['domain'];
+                    }
 
-            $groupedData[$pub_id][$property][] = $row['domain'];
-        }
+                    // Print the table
+                    foreach ($groupedData as $pub_id => $properties) {
+                        $pub_id_rowspan = count($properties);
+                        $firstProperty = true;
 
-        // Print the table
-        foreach ($groupedData as $pub_id => $properties) {
-            $pub_id_rowspan = count($properties);
-            $firstProperty = true;
-
-            foreach ($properties as $property => $domains) {
-                ?>
-                <tr>
-                    <?php if ($firstProperty) : ?>
-                        <td rowspan="<?= $pub_id_rowspan ?>"><?= htmlspecialchars($pub_id) ?></td>
-                        <?php $firstProperty = false; ?>
-                    <?php endif; ?>
-                    <td><?= htmlspecialchars($property) ?></td>
-                    <td>
-                        <?php foreach ($domains as $domain) : ?>
-                            <?= htmlspecialchars($domain) ?><br>
-                        <?php endforeach; ?>
-                    </td>
-                </tr>
-                <?php
-            }
-        }
-        ?>
+                        foreach ($properties as $property => $domains) {
+                            ?>
+                            <tr>
+                                <?php if ($firstProperty): ?>
+                                    <td rowspan="<?= $pub_id_rowspan ?>"><?= htmlspecialchars($pub_id) ?></td>
+                                    <?php $firstProperty = false; ?>
+                                <?php endif; ?>
+                                <td><?= htmlspecialchars($property) ?></td>
+                                <td>
+                                    <?php foreach ($domains as $domain): ?>
+                                        <?= htmlspecialchars($domain) ?><br>
+                                    <?php endforeach; ?>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    }
+                    ?>
                 </table>
             </div>
 
-            <footer class="footer">
-                <div class="container-fluid d-flex justify-content-between">
-                    <nav class="pull-left">
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="http://www.themekita.com">
-                                    ThemeKita
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"> Help </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"> Licenses </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div class="copyright">
-                        2024, made with <i class="fa fa-heart heart text-danger"></i> by
-                        <a href="http://www.themekita.com">ThemeKita</a>
-                    </div>
-                    <div>
-                        Distributed by
-                        <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
-                    </div>
-                </div>
-            </footer>
+            <!-- the footer start -->
+            <?php include 'common/footer/footer.php' ?>
+            <!-- the footer end -->
         </div>
 
         <!-- Custom template | don't include it in your project! -->

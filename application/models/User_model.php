@@ -73,6 +73,34 @@ class User_model extends CI_Model
         }
     }
 
+    public function get_data_by_pub_id($pub_id) {
+        $this->db->select('publisher_property.*, publisher_domain.*');
+        $this->db->from('publisher_property');
+        $this->db->join('publisher_domain', 'publisher_property.prop_id = publisher_domain.prop_id');
+        $this->db->where('publisher_domain.pub_id', $pub_id);
+        $query = $this->db->get();
+
+        // echo"<pre>";
+        // print_r($query->result_array());
+        // die;
+
+        return $query->result();
+    }
+
+    public function get_publisher_earnings_and_revenue($pub_id) {
+        // Select all columns from publisher_earning and the revenue column from publisherdata
+        $this->db->select('publisher_earning.*, publisherdata.revenue');
+        $this->db->from('publisher_earning');
+        $this->db->join('publisherdata', 'publisher_earning.pub_id = publisherdata.user_id');
+        $this->db->where('publisher_earning.pub_id', $pub_id);
+        
+        // Execute the query
+        $query = $this->db->get();
+        
+        // Return the result as an array
+        return $query->result_array();
+    }
+
 
 }
 ?>

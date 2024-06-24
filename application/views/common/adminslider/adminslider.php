@@ -49,10 +49,18 @@
                                 <p>Create Property</p>
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a href="<?php echo base_url('Pubroute_controller/asigndomain'); ?>">
                                 <i class="fas fa-layer-group"></i>
                                 <p>Asign Domain</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('Pubroute_controller/adminpayments'); ?>">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Admin Payment</p>
                             </a>
                         </li>
 

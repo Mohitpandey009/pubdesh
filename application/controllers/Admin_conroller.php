@@ -73,7 +73,7 @@ class Admin_conroller extends CI_Controller
         $this->session->sess_destroy();
 
         // Redirect to the login page
-        // redirect('login');
+        redirect('Pubroute_controller/adminlogin');
     }
 
     public function approve_publisher($publisher_id)
@@ -131,20 +131,21 @@ class Admin_conroller extends CI_Controller
 
     }
 
-    public function savedomaindata(){
+    public function savedomaindata()
+    {
         $this->load->model('Admin_model');
-    
+
         // Set form validation rules
         $this->form_validation->set_rules('publisherid', 'Publisher ID', 'required');
         $this->form_validation->set_rules('property', 'Property', 'required');
-        $this->form_validation->set_rules('asigndomain', 'Asign Domain', 'required'); 
+        $this->form_validation->set_rules('asigndomain', 'Asign Domain', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             // $this->load->view('asigndomain');
             $this->session->set_flashdata('error', 'Fill all Filed of Form.');
             redirect('Pubroute_controller/asigndomain');
-        
-        }else{
+
+        } else {
             // Validation passed, process the form data
             $publisher_id = $this->input->post('publisherid');
             $property_id = $this->input->post('property');
@@ -161,15 +162,84 @@ class Admin_conroller extends CI_Controller
                 'domain' => $assigned_domain,
             ];
 
-         $res = $this->Admin_model->savedomaindata($data);
-         if ($res) {
-            redirect('Pubroute_controller/asigndomain');
-         }else{
-            $this->session->set_flashdata('error', 'Your data not inserted.');
-            redirect('Pubroute_controller/asigndomain');
-         }
+            $res = $this->Admin_model->savedomaindata($data);
+            if ($res) {
+                redirect('Pubroute_controller/asigndomain');
+            } else {
+                $this->session->set_flashdata('error', 'Your data not inserted.');
+                redirect('Pubroute_controller/asigndomain');
+            }
 
         }
     }
-    
+
+    public function publisher_all_domain($user_id)
+    {
+        header('Content-Type: application/json');
+        $domains = $this->Admin_model->get_domains_by_user_id($user_id);
+        echo json_encode($domains);
+    }
+
+    public function admin_payment_submit()
+    {
+
+        $this->form_validation->set_rules('publisherId', 'publisherId', 'required');
+        $this->form_validation->set_rules('year', 'year', 'required');
+        $this->form_validation->set_rules('month', 'month', 'required');
+        $this->form_validation->set_rules('invalidDeduction', 'invalidDeduction ', 'required');
+
+        $this->form_validation->set_rules('conversionRate', 'conversionRate', 'required');
+        $this->form_validation->set_rules('paydomain[]', 'Amount of Domain', 'required');
+        $this->form_validation->set_rules('domain_id[]', 'Domain', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('message', 'All Filed are neccessary');
+            redirect($_SERVER['HTTP_REFERER']);
+            // $this->load->view('adminpayments');
+        }
+
+        $data['pub_id'] = $this->input->post('publisherId');
+        $data['year'] = $this->input->post('year');
+        $data['month'] = $this->input->post('month');
+        $data['invalidDeduction'] = $this->input->post('invalidDeduction');
+        $data['conversionRate'] = $this->input->post('conversionRate');
+
+
+        $domain_ids = $this->input->post('domain_id');
+        $pay_domains = $this->input->post('paydomain');
+
+        // Initialize the combined array
+        $combined_domains = [];
+
+        // Combine domain_id and pay_domain arrays into one object array
+        if (is_array($domain_ids) && is_array($pay_domains)) {
+            for ($i = 0; $i < count($domain_ids); $i++) {
+                $combined_domains[] = [
+                    'domain_id' => $domain_ids[$i],
+                    'pay_domain' => $pay_domains[$i]
+                ];
+            }
+        }
+
+        $encodeddata = json_encode($combined_domains);
+        // Add the combined_domains array to the data array
+        $data['publisher_earn'] = $encodeddata;
+
+        // print_r($data);
+        // die;
+
+        $res = $this->Admin_model->earning_of_publisher($data);
+
+        if ($res) {
+            $this->session->set_flashdata('message', 'Data Submited');
+            redirect($_SERVER['HTTP_REFERER']);
+        } else {
+            $this->session->set_flashdata('message', 'Data not Submited');
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+
+    }
+
+
+
 }

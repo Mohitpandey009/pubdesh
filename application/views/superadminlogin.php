@@ -60,7 +60,6 @@
                                     </div>
                                 <?php } ?>
 
-                                
                                     <h2 style="text-align: center; font-weight: bold;">Login</h2>
                                     
                                     <form action="<?php echo base_url('Admin_conroller/authenticate'); ?>" method="post">

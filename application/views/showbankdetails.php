@@ -41,18 +41,18 @@
 
         <!-- the slider included -->
         <?php include 'common/userslider/sideslider.php'; ?>
-          <!-- the slider included end-->
-           
+        <!-- the slider included end-->
+
         <div class="main-panel">
 
             <!-- the header -->
-            <?php include 'common/header.php'; ?>
+            <?php include 'common/userheader/header.php'; ?>
+            <!-- the header -->
 
             <div class="container">
                 <div class="mainheading">
                     <h2>Your Bank Details</h2>
                 </div>
-
 
                 <div class="form">
 
@@ -86,7 +86,6 @@
                     <div class="form-group">
                         <label for="address">Address:</label>
                         <input type="text" id="address" name="address" value="<?= $userbank['address'] ?>" readonly>
-
                     </div>
 
                     <!-- City and Zip Code -->
@@ -100,7 +99,6 @@
                             <label for="zipCode">Zip Code:</label>
                             <input type="text" id="zipCode" name="zipCode" value="<?= $userbank['zip_code'] ?>"
                                 readonly>
-
                         </div>
                     </div>
 
@@ -132,6 +130,12 @@
                                 value="<?= $userbank['ac_number'] ?>" readonly>
 
                         </div>
+                    </div>
+
+                    <!-- Bank IFSC code -->
+                    <div class="form-group">
+                        <label for="bankName">IFSC Code:</label>
+                        <input type="text" id="ifsc" name="bankName" value="<?= $userbank['IFSC_Code'] ?>" readonly>
                     </div>
 
                     <!-- Bank Account Type -->

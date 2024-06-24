@@ -76,6 +76,22 @@ class Admin_model extends CI_Model
         return $query->result_array();
     }
 
+    // Method to fetch all domain names matching the user_id
+    public function get_domains_by_user_id($user_id)
+    {
+        $this->db->select('*');
+        $this->db->from('publisher_domain');
+        $this->db->where('pub_id', $user_id);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function earning_of_publisher($data)
+    {
+        return $this->db->insert('publisher_earning', $data);
+    }
+
 
 }
 ?>

@@ -38,16 +38,17 @@
 
 <body>
     <div class="wrapper">
-        
+
         <!-- the slider included start-->
-     <?php include'common/userslider/sideslider.php';?>
+        <?php include 'common/userslider/sideslider.php'; ?>
         <!-- the slider included end-->
 
         <div class="main-panel">
-            
-                <!-- the header -->
-       <?php include'common/header.php';?>
-            
+
+            <!-- the header -->
+            <?php include 'common/userheader/header.php'; ?>
+            <!-- the header -->
+
             <div class="container">
                 <div class="mainheading">
                     <h2>Enter Your Bank Details</h2>
@@ -60,8 +61,8 @@
                 <?php } ?>
 
                 <div class="form">
-                    <form id="bankDetailsForm" action="<?= base_url('User_controller/userbank_details') ?>" method="post"
-                        enctype="multipart/form-data">
+                    <form id="bankDetailsForm" action="<?= base_url('User_controller/userbank_details') ?>"
+                        method="post" enctype="multipart/form-data">
                         <!-- Organization Type -->
                         <div class="form-group">
                             <label for="orgType">Organization Type:</label>
@@ -135,6 +136,14 @@
                             </div>
                         </div>
 
+
+                        <!-- Bank IFSC code -->
+                        <div class="form-group">
+                            <label for="bankName">IFSC Code:</label>
+                            <input type="text" id="ifsc" name="ifsc">
+
+                        </div>
+
                         <!-- Bank Account Type -->
                         <div class="form-group">
                             <label for="accountType">Bank Account Type:</label>
@@ -184,7 +193,7 @@
                 </div>
             </div>
 
-           
+
 
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
@@ -213,7 +222,7 @@
                 });
             </script>
 
- <!-- JavaScript to handle GST registration details -->
+            <!-- JavaScript to handle GST registration details -->
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
                     const gstDetails = document.getElementById('gstDetails');

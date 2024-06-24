@@ -15,7 +15,6 @@ class User_controller extends CI_Controller
 
     public function register()
     {
-
         $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email');
         $this->form_validation->set_rules('name', 'username', 'trim|required');
         $this->form_validation->set_rules('password', 'password', 'trim|required');
@@ -51,7 +50,6 @@ class User_controller extends CI_Controller
 
         }
     }
-
 
     public function login()
     {
@@ -105,19 +103,17 @@ class User_controller extends CI_Controller
         }
     }
 
-
     public function logout()
     {
         // Unset session data
-        $this->session->unset_userdata(array('user_id', 'username', 'logged_in'));
+        $this->session->unset_userdata(array('user_id', 'username', 's_no'));
 
         // Destroy the session
         $this->session->sess_destroy();
 
         // Redirect to the login page
-        // redirect('login');
+        redirect('/');
     }
-
 
     public function userbank_details()
     {
@@ -144,6 +140,7 @@ class User_controller extends CI_Controller
         $this->form_validation->set_rules('accountNumber', 'accountNumber', 'trim|required');
         $this->form_validation->set_rules('confirmAccountNumber', 'confirmAccountNumber', 'trim|required');
         $this->form_validation->set_rules('accountType', 'accountType', 'trim|required');
+        $this->form_validation->set_rules('ifsc', 'IFSC', 'trim|required|min_length[11]|max_length[11]');
         $this->form_validation->set_rules('panCardNumber', 'panCardNumber', 'trim|required');
         $this->form_validation->set_rules('gstRegistered', 'gstRegistered', 'trim|required');
 
@@ -168,6 +165,7 @@ class User_controller extends CI_Controller
                     'zip_code' => $this->input->post('zipCode'),
                     'name' => $this->input->post('name'),
                     'bank_name' => $this->input->post('bankName'),
+                    'IFSC_Code'=>$this->input->post('ifsc'),
                     'ac_number' => $this->input->post('accountNumber'),
                     'account_type' => $this->input->post('accountType'),
                     'pan_number' => $this->input->post('panCardNumber'),
@@ -251,9 +249,7 @@ class User_controller extends CI_Controller
             redirect('Pubroute_controller/profile');
         }
     }
-
-
-    
+  
 
 }
 ?>
