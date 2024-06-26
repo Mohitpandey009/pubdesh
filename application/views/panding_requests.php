@@ -50,7 +50,6 @@
 
                     <div class="modal-body">
                         <form id="updateForm">
-
                             <div class="mb-3">
                                 <label for="recipient-name" class="col-form-label">User_id:</label>
                                 <input type="text" class="form-control" id="recipient-name" name="recipient_name"
@@ -78,7 +77,75 @@
         <!-- start Modal structure -->
 
         <!-- Sidebar -->
-        <?php include 'common/adminslider/adminslider.php'; ?>
+        <div class="sidebar" data-background-color="dark">
+            <div class="sidebar-logo">
+                <!-- Logo Header -->
+                <div class="logo-header" data-background-color="dark">
+                    <a href="index.html" class="logo">
+                        <img src="<?php echo base_url('assets/img/kaiadmin/logo_light.svg') ?>" alt="navbar brand"
+                            class="navbar-brand" height="20" />
+                    </a>
+                    <div class="nav-toggle">
+                        <button class="btn btn-toggle toggle-sidebar">
+                            <i class="gg-menu-right"></i>
+                        </button>
+                        <button class="btn btn-toggle sidenav-toggler">
+                            <i class="gg-menu-left"></i>
+                        </button>
+                    </div>
+                    <button class="topbar-toggler more">
+                        <i class="gg-more-vertical-alt"></i>
+                    </button>
+                </div>
+                <!-- End Logo Header -->
+            </div>
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    <ul class="nav nav-secondary">
+                        <li class="nav-item active">
+
+                            <div class="">
+                                <ul class="nav-item">
+                                    <li>
+                                        <a href="<?php echo base_url('Pubroute_controller/admindashboard') ?>">
+                                            <span class="sub-item">Dashboard </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('Pubroute_controller/pendingrequest'); ?>">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Panding Requests  <sup><?=$pendingcount?></sup></p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('Pubroute_controller/property'); ?>">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Create Property</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('Pubroute_controller/asigndomain'); ?>">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Asign Domain</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('Pubroute_controller/adminpayments'); ?>">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Admin Payment</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
         <!-- End Sidebar -->
 
         <div class="main-panel">
@@ -118,9 +185,6 @@
 
                                                 <button type="button" class="btn btn-danger decline"
                                                     value='<?= $row->s_no ?>'>Decline</button>
-
-
-
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -134,7 +198,7 @@
                     <div class="row">
                     </div>
                 </div>
-                
+
                 <!-- the footer start -->
                 <?php include 'common/footer/footer.php' ?>
                 <!-- the footer end -->
@@ -223,8 +287,12 @@
     <script src="<?php echo base_url('assets/js/core/bootstrap.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') ?>"></script>
 
-    <!-- jQuery Sparkline -->
-    <script src="<?php echo base_url('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') ?>"></script>
+    <!-- jQuery Scrollbar -->
+    <script src="<?php echo base_url('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') ?>"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="<?php echo base_url('assets/js/kaiadmin.min.js') ?>"></script>
+
 
 </body>
 

@@ -112,8 +112,6 @@
     <script src="<?php echo base_url('assets/js/core/jquery-3.7.1.min.js') ?>"></script>
 
     <!-- script for reset password -->
-
-
     <script>
         var changePasswordBtn = document.getElementById("changePasswordBtn");
         var passwordChangePopup = document.getElementById("passwordChangePopup");
@@ -142,7 +140,10 @@
             passwordChangePopup.style.display = "none";
             passwordChangeForm.reset();
         }
-    </script>
+    </script>   
+
+    <!-- jQuery Scrollbar -->
+    <script src="<?php echo base_url('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') ?>"></script>
 
 </body>
 

@@ -221,10 +221,10 @@
                                 aria-labelledby="heading<?= $index ?>" data-bs-parent="#accordionExample">
                                 <?php foreach ($earnings as $earning): ?>
                                     <div class="accordion-body" style="display: flex; justify-content: space-between; flex: 1;">
-                                        <p>Domain ID: <?= $earning['domain_id'] ?></p>
+                                        <p>Domain : <?= $earning['domain_id'] ?></p>
 
 
-                                        <p>Payment Domain: <?php
+                                        <p>$ <?php
                                         $revenue = ($earning['pay_domain'] * $earn['revenue']) / 100;
                                         echo $earning['pay_domain'] - $revenue;
                                         $totalpay += $earning['pay_domain'] - $revenue;
@@ -242,12 +242,12 @@
                                     <div class="accordion-body"
                                         style="display: flex; justify-content: space-between; flex: 1;">
                                         <h5>Conversion Rate</h5>
-                                        <p>$1 = <?= $earn['conversionRate'] ?></p>
+                                        <p>$ 1 = <?= $earn['conversionRate'] ?></p>
                                     </div>
                                     <div class="accordion-body"
                                         style="display: flex; justify-content: space-between; flex: 1;">
                                         <h5>Invalid Deduction</h5>
-                                        <p><?= $earn['invalidDeduction'] ?></p>
+                                        <p>$ <?= $earn['invalidDeduction'] ?></p>
                                     </div>
                                 </div>
                                 <hr>
@@ -256,7 +256,7 @@
                                     <div class="accordion-body"
                                         style="display: flex; justify-content: space-between; flex: 1;">
                                         <h5>Net Payment</h5>
-                                        <p><?= $totalpay - $earn['invalidDeduction'] ?></p>
+                                        <p>INR : <?= ($totalpay - $earn['invalidDeduction'])* $earn['conversionRate'] ?></p>
                                     </div>
                                 </div>
                             </div>

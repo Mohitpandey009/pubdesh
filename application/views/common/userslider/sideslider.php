@@ -1,6 +1,4 @@
 <!-- Sidebar -->
-
-
 <div class="sidebar" data-background-color="dark">
     <div class="sidebar-logo">
         <!-- Logo Header -->
@@ -32,24 +30,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="<?php echo base_url('Pubroute_controller/domains') ?>">
+                    <a href="<?php echo base_url('Pubroute_controller/domains') ?>">
                         <i class="fas fa-globe"></i>
                         <p>Domains</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="base">
-                        <ul class="nav nav-collapse">
-                            <?php if($domain): ?>
-                                <?php foreach($domain as $d): ?>
-                                    <li>
-                                        <a href="#">
-                                            <span class="sub-item"><?=$d->property?></span>
-                                        </a>
-                                    </li>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                        </ul>
-                    </div>
+                    
                 </li>
                 <li class="nav-item">
                     <a href="#">

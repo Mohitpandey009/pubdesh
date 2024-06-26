@@ -32,14 +32,27 @@ class Pubroute_controller extends CI_Controller {
 
     // admin dashboard
     public function admindashboard(){
-        $this->load->view('superadmindashboard');
+        $data['pendingcount']=$this->Admin_model->getpublisherdatacount();
+        $username = $this->session->userdata('username');
+       if($username == 'admin'){
+        $this->load->view('superadmindashboard',$data);
+       }else{
+        $this->load->view('superadminlogin'); 
+       }
     }
 
     // admin pending request
     public function pendingrequest(){
+        $username = $this->session->userdata('username');
         $this->load->model('Admin_model');
         $data['pendingapprove']=$this->Admin_model->getpublisherdata();
-        $this->load->view('panding_requests',$data);
+        $data['pendingcount']=$this->Admin_model->getpublisherdatacount();
+
+        if($username == 'admin'){
+            $this->load->view('panding_requests',$data);
+           }else{
+            $this->load->view('superadminlogin'); 
+           }
     }
 
     public function bankdetails() {
@@ -58,24 +71,37 @@ class Pubroute_controller extends CI_Controller {
     }
     
      public function asigndomain(){
+        $username = $this->session->userdata('username');
         $this->load->model('Admin_model');
         $data['domain']=$this->Admin_model->getdomaindata();
         $data['publiser']=$this->Admin_model->get_approved_publisher();
+        $data['pendingcount']=$this->Admin_model->getpublisherdatacount();
         $data['prop_id']=$this->Admin_model->getall_property();
-        $this->load->view('asigndomain',$data);
+
+        if($username == 'admin'){
+            $this->load->view('asigndomain',$data);
+           }else{
+            $this->load->view('superadminlogin'); 
+           }
     }
 
     public function property(){
-        $this->load->model('Admin_model');
+        $username = $this->session->userdata('username');
         $data['allproperty'] = $this->Admin_model->getall_property();
-        $this->load->view('createproperty',$data);
+        $data['pendingcount']=$this->Admin_model->getpublisherdatacount();
+       
+        if($username == 'admin'){
+            $this->load->view('createproperty',$data);
+           }else{
+            $this->load->view('superadminlogin'); 
+           }
     }
 
     public function domains(){
         $user_id = $this->session->userdata('user_id');
         // $data['domain']= $this->User_model->pub_domain_data($user_id);
         $data['domain']= $this->User_model->get_data_by_pub_id($user_id);
-        $this->load->view('common/userslider/sideslider',$data);
+        // $this->load->view('common/userslider/sideslider',$data);
         $this->load->view('domains',$data);
     }
     
@@ -86,8 +112,15 @@ class Pubroute_controller extends CI_Controller {
     }
 
     public function adminpayments(){
+        $username = $this->session->userdata('username');
         $data['approve']=$this->Admin_model->get_approved_publisher();
-        $this->load->view('adminpayments',$data);
+        $data['pendingcount']=$this->Admin_model->getpublisherdatacount();
+        
+        if($username == 'admin'){
+            $this->load->view('adminpayments',$data);
+           }else{
+            $this->load->view('superadminlogin'); 
+           }
     }
 
     public function userpayments(){

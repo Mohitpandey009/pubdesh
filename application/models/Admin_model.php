@@ -15,6 +15,14 @@ class Admin_model extends CI_Model
         return $query->result();
     }
 
+    public function getpublisherdatacount()
+    {
+        $this->db->where('approved', 0);
+        $this->db->from('publisherdata');
+        $count = $this->db->count_all_results();
+        return $count;
+        
+    }
 
     public function approve_publisher($publisher_id, $user_id, $share)
     {
@@ -33,7 +41,6 @@ class Admin_model extends CI_Model
             return false;
         }
     }
-
 
     public function delete_publisher($publisher_id)
     {
@@ -92,6 +99,63 @@ class Admin_model extends CI_Model
         return $this->db->insert('publisher_earning', $data);
     }
 
+    public function deletedata($id, $table)
+    {
+        if ($table == '0') {
+            // Delete the record from the specified table
+            $this->db->where('PROP_id', $id);  
+            // Assuming the primary key is named 'id'
+            $result = $this->db->delete('publisher_property');
+            if ($result) {
+                echo json_encode(['status' => 'success']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Failed to delete the record.']);
+            }
+
+        } elseif ($table == '1') {
+            // Delete the record from the specified table
+            $this->db->where('domain_id', $id);  
+            // Assuming the primary key is named 'id'
+            $result = $this->db->delete('publisher_domain');
+            if ($result) {
+                echo json_encode(['status' => 'success']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Failed to delete the record.']);
+            }
+
+        } else {
+
+            echo json_encode(['status' => 'error', 'message' => 'Failed to delete the record.']);
+
+        }
+
+    }
+
+    public function updatedata($id, $data) {
+        // Ensure $id is not empty and $data contains update fields
+        if (!empty($id) && !empty($data)) {
+            $this->db->where('PROP_id', $id); // Assuming 'PROP_id' is the primary key or unique identifier
+            $this->db->update('publisher_property', $data);
+
+            return true; // Return true on success
+        } else {
+            return false; // Return false if $id or $data is empty
+        }
+    }
+
+
+    public function edit_domian($id, $data) {
+        if (!empty($id) && !empty($data)) {
+            $this->db->where('domain_id', $id); 
+            // Assuming 'PROP_id' is the primary key or unique identifier
+            $this->db->update('publisher_domain', $data);
+
+            return true; // Return true on success
+        } else {
+            return false; // Return false if $id or $data is empty
+        }
+
+    }
 
 }
 ?>

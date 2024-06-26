@@ -39,7 +39,80 @@
 <body>
 
     <!-- include the slider start -->
+    <div class="sidebar" data-background-color="dark">
+    <?php if (!empty($domain)): ?>
+    <div class="sidebar-logo">
+        <!-- Logo Header -->
+        <div class="logo-header" data-background-color="dark">
+            <a href="index.html" class="logo">
+                <img src="<?php echo base_url('assets/img/kaiadmin/logo_light.svg') ?>" alt="navbar brand" class="navbar-brand" height="20" />
+            </a>
+            <div class="nav-toggle">
+                <button class="btn btn-toggle toggle-sidebar">
+                    <i class="gg-menu-right"></i>
+                </button>
+                <button class="btn btn-toggle sidenav-toggler">
+                    <i class="gg-menu-left"></i>
+                </button>
+            </div>
+            <button class="topbar-toggler more">
+                <i class="gg-more-vertical-alt"></i>
+            </button>
+        </div>
+        <!-- End Logo Header -->
+    </div>
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+            <ul class="nav nav-secondary">
+                <li class="nav-item active">
+                    <a href="<?php echo base_url('Pubroute_controller/userdashboard') ?>">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span class="sub-item">Dashboard</span>
+                    </a>
+                </li>
 
+                    <li class="nav-item">
+                            <a data-bs-toggle="collapse" href="#base">
+                                <i class="fas fa-globe"></i>
+                                <p>Domains</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="base">
+                                <ul class="nav nav-collapse">
+
+                                <?php foreach ($domain as $d): ?>
+                                    <li>
+                                        <a href="<?php echo base_url('pubroute_controller/domains/') ?>">
+                                            <span class="sub-item"><?= $d->property;?></span>
+                                        </a>
+                                    </li>
+                                    <?php endforeach; ?>
+
+                                </ul>
+                            </div>
+                        </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="fas fa-file-alt"></i>
+                        <p>Reports</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?=base_url('pubroute_controller/userpayments')?>">
+                        <i class="fas fa-credit-card"></i>
+                        <p>Payments</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="fas fa-file-invoice"></i>
+                        <p>Generate Invoice</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
     <!-- include the slider end -->
 
     <div class="main-panel">
@@ -52,7 +125,7 @@
             <div class="Domandata" style="text-align:center;">
                 <h1>Domain Data</h1>
             </div>
-            <?php if (!empty($domain)): ?>
+          
                 <table style="width:98%; margin:auto;">
                     <tr>
                         <th>ID</th>
@@ -85,64 +158,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Function to allow only numbers (integers) in the input fields
-            function restrictToNumbers(event) {
-                const input = event.target;
-                input.value = input.value.replace(/\D/g, ''); // Replace non-digit characters with empty string
-            }
-
-            // Selecting the input fields that need numeric validation
-            const zipCodeField = document.getElementById('zipCode');
-            const accountNumberField = document.getElementById('accountNumber');
-            const confirmAccountNumberField = document.getElementById('confirmAccountNumber');
-
-            // Attaching event listeners to the input fields
-            zipCodeField.addEventListener('input', restrictToNumbers);
-            accountNumberField.addEventListener('input', restrictToNumbers);
-            confirmAccountNumberField.addEventListener('input', restrictToNumbers);
-
-            // Adjusting labels if "number" is entered instead of "type"
-            const orgTypeLabel = document.querySelector('label[for="orgType"]');
-            orgTypeLabel.textContent = "Organization Number:";
-
-            const accountTypeLabel = document.querySelector('label[for="accountType"]');
-            accountTypeLabel.textContent = "Bank Account Number Type:";
-        });
-    </script>
-
-    <script>
-        // JavaScript to handle GST registration details
-        document.addEventListener('DOMContentLoaded', function () {
-            const gstDetails = document.getElementById('gstDetails');
-            const gstYes = document.getElementById('gstYes');
-            const gstNo = document.getElementById('gstNo');
-
-            gstYes.addEventListener('change', function () {
-                if (gstYes.checked) {
-                    gstDetails.innerHTML = `
-                        <label for="gstNumber">GST Number:</label>
-                        <input type="text" id="gstNumber" name="gstNumber" required>
-                    `;
-                }
-            });
-
-            gstNo.addEventListener('change', function () {
-                if (gstNo.checked) {
-                    gstDetails.innerHTML = `
-                        
-                    `;
-                }
-            });
-        });
-    </script>
-    <!-- Custom template | don't include it in your project! -->
-
-    <!-- End Custom template -->
-     
     </div>
-    
     </div>
     <script src="<?php echo base_url('assets/js/core/jquery-3.7.1.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/core/popper.min.js') ?>"></script>
@@ -150,23 +166,6 @@
 
     <!-- jQuery Scrollbar -->
     <script src="<?php echo base_url('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') ?>"></script>
-
-    <!-- Chart JS -->
-    <script src="<?php echo base_url('assets/js/plugin/chart.js/chart.min.js') ?>"></script>
-
-    <!-- jQuery Sparkline -->
-    <script src="<?php echo base_url('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') ?>"></script>
-
-
-    <!-- jQuery Vector Maps -->
-    <script src="<?php echo base_url('assets/js/plugin/jsvectormap/jsvectormap.min.js') ?>"></script>
-    <script src="<?php echo base_url('assets/js/plugin/jsvectormap/world.js') ?>"></script>
-
-    <!-- Kaiadmin JS -->
-    <script src="<?php echo base_url('assets/js/kaiadmin.min.js') ?>"></script>
-
-    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-    <script src="<?php echo base_url('assets/js/setting-demo.js') ?>"></script>
 
 </body>
 

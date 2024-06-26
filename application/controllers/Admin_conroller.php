@@ -87,7 +87,7 @@ class Admin_conroller extends CI_Controller
             $this->Admin_model->approve_publisher($publisher_id, $user_id, $share);
         } else {
             $this->load->view('pendingrequest');
-            // echo"the form validation false...";
+            
         }
 
     }
@@ -106,7 +106,6 @@ class Admin_conroller extends CI_Controller
 
     public function createproperty()
     {
-
         $this->form_validation->set_rules('property', 'property', 'trim|required');
 
         if ($this->form_validation->run()) {
@@ -240,6 +239,48 @@ class Admin_conroller extends CI_Controller
 
     }
 
+    public function deletedata($id, $table)
+    {
+        return $this->Admin_model->deletedata($id, $table);
+    }
 
+    public function update_property($prop_id)
+    {
+        // Example of updating data
+        $data = array(
+            'property' => $this->input->post('property')
+        );
+
+        // Call the model method to update data
+        $this->load->model('Admin_model');
+        $success = $this->Admin_model->updatedata($prop_id, $data);
+
+        if ($success) {
+            // Data updated successfully
+            echo "Data updated successfully!";
+        } else {
+            // Failed to update data
+            echo "Failed to update data!";
+        }
+    }
+
+    public function update_domian($id)
+    {
+        // Example of updating data
+        $data = array(
+            'domain' => $this->input->post('domain')
+        );
+        // Call the model method to update data
+        $this->load->model('Admin_model');
+        $success = $this->Admin_model->edit_domian($id, $data);
+
+        if ($success) {
+            // Data updated successfully
+            echo "Data updated successfully!";
+        } else {
+            // Failed to update data
+            echo "Failed to update data!";
+        }
+    }
 
 }

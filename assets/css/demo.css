@@ -175,6 +175,12 @@
 .demo #slider {
   margin-bottom: 15px;
 }
+sup{
+  color: red !important;
+  font-size: 20px;
+  position: absolute;
+  top: 4px;
+}
 
 
 .demo-icon {

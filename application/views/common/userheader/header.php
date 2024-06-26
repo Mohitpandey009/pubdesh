@@ -2,7 +2,7 @@
     <div class="main-header-logo">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
-            <a href="index.html" class="logo">
+            <a href="#" class="logo">
                 <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="20" />
             </a>
             <div class="nav-toggle">
@@ -33,27 +33,20 @@
                 <li class="nav-item topbar-user dropdown hidden-caret">
                     <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
                         <div class="avatar-sm">
-                            <img src="<?php echo base_url('assets/img/profile.jpg') ?>" alt="..."
+                            <img src="<?php echo base_url('assets/img/profileavtar/avtar.png') ?>" alt="..."
                                 class="avatar-img rounded-circle" />
                         </div>
-                        <span class="profile-username">
-                            <span class="op-7">Hi,</span>
-                            <span class="fw-bold">Hizrian</span>
-                        </span>
+                       
                     </a>
                     <ul class="dropdown-menu dropdown-user animated fadeIn">
                         <div class="dropdown-user-scroll scrollbar-outer">
                             <li>
                                 <div class="user-box">
                                     <div class="avatar-lg">
-                                        <img src="<?php echo base_url('assets/img/profile.jpg') ?>" alt="image profile"
+                                        <img src="<?php echo base_url('assets/img/profileavtar/avtar.png') ?>" alt="image profile"
                                             class="avatar-img rounded" />
                                     </div>
-                                    <div class="u-text">
-                                        <h4>Hizrian</h4>
-                                        <p class="text-muted">1234567</p>
-
-                                    </div>
+                                    
                                 </div>
                             </li>
                             <li>

@@ -38,13 +38,102 @@
 
 <body>
     <div class="wrapper">
-        <!-- include the slider start -->
-        <?php include 'common/adminslider/adminslider.php'; ?>
-        <!-- include the slider end -->
+        <!-- Modal Structure -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Property</h1>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                <input type="text" class="form-control" id="Properties">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="send">Send message</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar" data-background-color="dark">
+            <div class="sidebar-logo">
+                <!-- Logo Header -->
+                <div class="logo-header" data-background-color="dark">
+                    <a href="index.html" class="logo">
+                        <img src="<?php echo base_url('assets/img/kaiadmin/logo_light.svg') ?>" alt="navbar brand"
+                            class="navbar-brand" height="20" />
+                    </a>
+                    <div class="nav-toggle">
+                        <button class="btn btn-toggle toggle-sidebar">
+                            <i class="gg-menu-right"></i>
+                        </button>
+                        <button class="btn btn-toggle sidenav-toggler">
+                            <i class="gg-menu-left"></i>
+                        </button>
+                    </div>
+                    <button class="topbar-toggler more">
+                        <i class="gg-more-vertical-alt"></i>
+                    </button>
+                </div>
+                <!-- End Logo Header -->
+            </div>
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    <ul class="nav nav-secondary">
+                        <li class="nav-item active">
+
+                            <div class="">
+                                <ul class="nav-item">
+                                    <li>
+                                        <a href="<?php echo base_url('Pubroute_controller/admindashboard') ?>">
+                                            <span class="sub-item">Dashboard </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('Pubroute_controller/pendingrequest'); ?>">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Panding Requests  <sup><?=$pendingcount?></sup></p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('Pubroute_controller/property'); ?>">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Create Property</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('Pubroute_controller/asigndomain'); ?>">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Asign Domain</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('Pubroute_controller/adminpayments'); ?>">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Admin Payment</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Sidebar -->
 
         <div class="main-panel">
-
-            <!-- header -->
+            <!-- Header -->
             <?php include 'common/adminheader/adminheader.php'; ?>
             <!-- End header -->
 
@@ -69,29 +158,84 @@
                     <tr>
                         <th>ID</th>
                         <th>Properties</th>
+                        <th>Action</th>
                     </tr>
                     <?php foreach ($allproperty as $data) { ?>
                         <tr>
                             <td><?= $data['s_no'] ?></td>
                             <td><?= $data['property'] ?></td>
-
+                            <td class="text-center">
+                                <button type="button" class="btn btn-danger delete-btn"
+                                    id="<?= $data['PROP_id'] ?>">Delete</button>
+                                <button type="button" class="btn btn-warning openModalButton"
+                                    data-prop-id="<?= $data['PROP_id'] ?>" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">Edit</button>
+                            </td>
                         </tr>
                     <?php } ?>
                 </table>
             </div>
 
-            <!-- the footer start -->
+            <!-- The footer start -->
             <?php include 'common/footer/footer.php' ?>
-            <!-- the footer end -->
-             
+            <!-- The footer end -->
+
         </div>
-
-        <!-- Custom template | don't include it in your project! -->
-
-        <!-- End Custom template -->
     </div>
-    </div>
+    <script src="<?php echo base_url('assets/js/core/jquery-3.7.1.min.js') ?>"></script>
 
+    <script src="<?php echo base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.delete-btn').click(function () {
+                var id = $(this).attr('id');
+                var table = '0';
+
+                if (confirm("Are you sure you want to delete this record?")) {
+                    $.ajax({
+                        url: `<?= base_url('Admin_conroller/deletedata/') ?>${id}/${table}`,
+                        type: 'POST',
+                        success: function (response) {
+                            response = JSON.parse(response);
+                            if (response.status === 'success') {
+                                location.reload();
+                            } else {
+                                alert('Failed to delete the record. Please try again.');
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error:', error);
+                            alert('An error occurred while trying to delete the record.');
+                        }
+                    });
+                }
+            });
+
+            let publisherId;
+
+            $('.openModalButton').click(function () {
+                publisherId = $(this).data('prop-id');
+                $('#exampleModal').modal('show');
+            });
+
+            $('#send').click(function () {
+                var property = $('#Properties').val();
+                $.ajax({
+                    type: 'POST',
+                    url: `<?= base_url('Admin_conroller/update_property/') ?>${publisherId}`,
+                    data: { property: property },
+                    success: function (response) {
+                        location.reload();
+                        console.log('Update successful:', response);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error:', error);
+                        alert('Failed to update. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
-
 </html>
