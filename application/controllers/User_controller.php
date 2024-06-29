@@ -64,6 +64,7 @@ class User_controller extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             // If validation fails, reload the login view with errors
             $this->load->view('userlogin');
+            // redirect('Pubroute_controller/userlogin');
         } else {
             $email = $this->input->post('email');
             $password = $this->input->post('password');

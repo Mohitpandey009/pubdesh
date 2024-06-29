@@ -9,6 +9,7 @@
 
     <!-- Fonts and icons -->
     <script src="<?php echo base_url('assets/js/plugin/webfont/webfont.min.js') ?>"></script>
+
     <script>
         WebFont.load({
             google: { families: ["Public Sans:300,400,500,600,700"] },
@@ -34,13 +35,15 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/demo.css') ?>" />
+
 </head>
 
 <body>
     <div class="wrapper">
 
         <!-- Modal Structure -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -62,8 +65,8 @@
         </div>
         <!-- Modal Structure End-->
 
-                <!-- Sidebar -->
-                <div class="sidebar" data-background-color="dark">
+        <!-- Sidebar -->
+        <div class="sidebar" data-background-color="dark">
             <div class="sidebar-logo">
                 <!-- Logo Header -->
                 <div class="logo-header" data-background-color="dark">
@@ -104,7 +107,7 @@
                         <li class="nav-item">
                             <a href="<?php echo base_url('Pubroute_controller/pendingrequest'); ?>">
                                 <i class="fas fa-layer-group"></i>
-                                <p>Panding Requests  <sup><?=$pendingcount?></sup></p>
+                                <p>Panding Requests <sup><?= $pendingcount ?></sup></p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -135,9 +138,11 @@
         <!-- End Sidebar -->
 
         <div class="main-panel">
+
             <!-- header -->
             <?php include 'common/adminheader/adminheader.php'; ?>
             <!-- End header -->
+
 
             <div class="container">
 
@@ -179,7 +184,6 @@
                         </div>
                     </form>
                 </div>
-
                 <div class="Domandata" style="text-align:center;">
                     <h1>Domain Data</h1>
                 </div>
@@ -213,25 +217,26 @@
                         $firstProperty = true;
 
                         foreach ($properties as $property => $domains) {
-                    ?>
+                            ?>
                             <tr>
-                                <?php if ($firstProperty) : ?>
+                                <?php if ($firstProperty): ?>
                                     <td rowspan="<?= $pub_id_rowspan ?>"><?= htmlspecialchars($pub_id) ?></td>
                                     <?php $firstProperty = false; ?>
                                 <?php endif; ?>
                                 <td><?= htmlspecialchars($property) ?></td>
                                 <td>
-                                    <?php foreach ($domains as $domain) : ?>
+                                    <?php foreach ($domains as $domain): ?>
                                         <?= htmlspecialchars($domain['domain']) ?>
 
-                                        <button type="button" class="btn btn-danger delete-btn"  
-                                        id="<?= $domain['domain_id'] ?>">Delete</button>
-                                    
-                                        <button type="button" class="btn btn-primary openModalButton" data-domain-id="<?= $domain['domain_id'] ?>">Edit</button>
+                                        <button type="button" class="btn btn-danger delete-btn"
+                                            id="<?= $domain['domain_id'] ?>">Delete</button>
+
+                                        <button type="button" class="btn btn-primary openModalButton" data-toggle="modal"
+                                            data-target="#exampleModal" data-domain-id="<?= $domain['domain_id'] ?>">Edit</button>
                                     <?php endforeach; ?>
                                 </td>
                             </tr>
-                    <?php
+                            <?php
                         }
                     }
                     ?>
@@ -241,14 +246,59 @@
             <!-- the footer start -->
             <?php include 'common/footer/footer.php' ?>
             <!-- the footer end -->
-        </div>
-    </div>
 
+        </div>
+
+    </div>
+    </div>
+    <!--   Core JS Files   -->
     <script src="<?php echo base_url('assets/js/core/jquery-3.7.1.min.js') ?>"></script>
-    <script src="<?php echo base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="<?php echo base_url('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') ?>"></script>
+
+    <!-- Kaiadmin JS important-->
+    <script src="<?php echo base_url('assets/js/kaiadmin.min.js') ?>"></script>
+
+    <!-- script for jquery and bootstrap -->
+    <script src="<?php echo base_url('assets/js/core/popper.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/core/bootstrap.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') ?>"></script>
+
+
+    <script>
+        $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#177dff",
+            fillColor: "rgba(23, 125, 255, 0.14)",
+        });
+
+        $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#f3545d",
+            fillColor: "rgba(243, 84, 93, .14)",
+        });
+
+        $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#ffa534",
+            fillColor: "rgba(255, 165, 52, .14)",
+        });
+    </script>
 
     <script>
         $(document).ready(function () {
+            // console.log("the script runing");
+
             $('.delete-btn').click(function () {
                 var id = $(this).attr('id');
                 var table = '1';
@@ -275,8 +325,9 @@
             let domainId;
             // Open modal on Edit button click
             $('.openModalButton').click(function () {
-                 domainId = $(this).data('domain-id');
-                // console.log("the domian id ",domainId);
+                domainId = $(this).data('domain-id');
+                // console.log();
+                console.log("the button clicked domian id ",domainId);
                 $('#exampleModal').modal('show');
             });
 
@@ -299,6 +350,7 @@
 
         });
     </script>
+
 
 </body>
 

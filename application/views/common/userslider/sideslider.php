@@ -66,24 +66,19 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- Additional JS files -->
+   <!-- Kaiadmin JS important-->
+   <script src="<?php echo base_url('assets/js/kaiadmin.min.js') ?>"></script>
+
+<!-- script for jquery and bootstrap -->
+<script src="<?php echo base_url('assets/js/core/popper.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/core/bootstrap.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') ?>"></script>
-<script src="<?php echo base_url('assets/js/plugin/chart.js/chart.min.js') ?>"></script>
-<script src="<?php echo base_url('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') ?>"></script>
-<script src="<?php echo base_url('assets/js/plugin/chart-circle/circles.min.js') ?>"></script>
-<script src="<?php echo base_url('assets/js/plugin/datatables/datatables.min.js') ?>"></script>
-<script src="<?php echo base_url('assets/js/plugin/jsvectormap/jsvectormap.min.js') ?>"></script>
-<script src="<?php echo base_url('assets/js/plugin/jsvectormap/world.js') ?>"></script>
-<script src="<?php echo base_url('assets/js/plugin/sweetalert/sweetalert.min.js') ?>"></script>
-<script src="<?php echo base_url('assets/js/kaiadmin.min.js') ?>"></script>
-<script src="<?php echo base_url('assets/js/setting-demo.js') ?>"></script>
-<script src="<?php echo base_url('assets/js/demo.js') ?>"></script>
 
 <script>
     $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
         type: "line",
         height: "70",
-        width: "100%",
+        width: "100%",  
         lineWidth: "2",
         lineColor: "#177dff",
         fillColor: "rgba(23, 125, 255, 0.14)",
@@ -107,3 +102,6 @@
         fillColor: "rgba(255, 165, 52, .14)",
     });
 </script>
+
+
+
