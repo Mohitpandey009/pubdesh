@@ -46,7 +46,7 @@
                         $printed_properties[] = $d->property;
                   ?>
                     <li>
-                    <a href="<?= base_url('Pubroute_controller/propertydomain/' . $d->prop_id); ?>">
+                    <a href="<?= base_url('propertydomain/' . $d->prop_id); ?>">
 
                         <span class="sub-item"><?php echo $d->property; ?></span>
                       </a>

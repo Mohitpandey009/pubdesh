@@ -59,8 +59,10 @@ $route['userRegister'] = 'Pubroute_controller/userRegister';
 $route['userdashboard'] = 'Pubroute_controller/userdashboard';
 $route['bankdetails'] = 'pubroute_controller/bankdetails';
 $route['profile'] = 'pubroute_controller/profile';
-$route['domains'] = 'pubroute_controller/domains';
+// $route['domains'] = 'pubroute_controller/domains';
 $route['userpayments'] = 'pubroute_controller/userpayments';
+$route['propertydomain/(:any)'] = 'Pubroute_controller/propertydomain/$1';
+
 
 
 // admin route 

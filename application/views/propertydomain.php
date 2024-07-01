@@ -39,7 +39,8 @@
 <body>
 
     <?php
-    $id = $this->uri->segment(3);
+    $id = $this->uri->segment(2);
+  
     $filteredData = [];
     foreach ($domain as $item) {
         if ($item->prop_id === $id) {
@@ -81,8 +82,6 @@
         </div>
     </div>
 
-
-    
     </div>
     </div>
     
