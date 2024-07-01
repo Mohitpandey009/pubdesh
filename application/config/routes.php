@@ -54,4 +54,19 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 
+// for user route 
+$route['userRegister'] = 'Pubroute_controller/userRegister';
+$route['userdashboard'] = 'Pubroute_controller/userdashboard';
+$route['bankdetails'] = 'pubroute_controller/bankdetails';
+$route['profile'] = 'pubroute_controller/profile';
+$route['domains'] = 'pubroute_controller/domains';
+$route['userpayments'] = 'pubroute_controller/userpayments';
+
+
+// admin route 
+$route['authenticate/adminlogin'] = 'pubroute_controller/adminlogin';
+$route['authenticate/admindashboard'] = 'pubroute_controller/admindashboard';
+$route['authenticate/pendingrequest'] = 'pubroute_controller/pendingrequest';
+$route['authenticate/showdomain'] = 'pubroute_controller/pendingrequest';
+ 
 

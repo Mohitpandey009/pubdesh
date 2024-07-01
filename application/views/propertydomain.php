@@ -5,11 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
-    <link rel="icon" href="<?php echo base_url('assets/img/kaiadmin/favicon.ico')?>" type="image/x-icon" />
+    <link rel="icon" href="<?php echo base_url('assets/img/kaiadmin/favicon.ico') ?>" type="image/x-icon" />
 
     <!-- Fonts and icons -->
-    <script src="<?php echo base_url('assets/js/plugin/webfont/webfont.min.js')?>"></script>
-
+    <script src="<?php echo base_url('assets/js/plugin/webfont/webfont.min.js') ?>"></script>
     <script>
         WebFont.load({
             google: { families: ["Public Sans:300,400,500,600,700"] },
@@ -20,7 +19,7 @@
                     "Font Awesome 5 Brands",
                     "simple-line-icons",
                 ],
-                urls: ["<?php echo base_url('assets/css/fonts.min.css')?>"],
+                urls: ["<?php echo base_url('assets/css/fonts.min.css') ?>"],
             },
             active: function () {
                 sessionStorage.fonts = true;
@@ -38,28 +37,55 @@
 </head>
 
 <body>
-   
 
+    <?php
+    $id = $this->uri->segment(3);
+    $filteredData = [];
+    foreach ($domain as $item) {
+        if ($item->prop_id === $id) {
+            $filteredData[] = $item;
+        }
+    }
+    ?>
 
-        <div class="main-panel">
+    <div class="main-panel">
 
-
-            <div class="container">
-                <div class="page-inner">
-                    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
-                        <div>
-                            <h2>Hello And Admin Name</h2>
-                            <h3 class="mb-3">Dashboard</h3>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                    </div>
-                </div>
+        <div class="container">
+            <div class="Domandata" style="text-align:center;">
+                <h1>Domain Data</h1>
             </div>
 
+            <table style="width:98%; margin:auto;">
+                <tr>
+                    <th>ID</th>
+                    <th>Domain</th>
+                </tr>
+                <?php $index = 1; ?>
+
+                <?php foreach ($filteredData as $d): ?>
+                    <tr>
+                        <td><?php echo $index; ?></td>
+                        <td><?php echo $d->domain; ?></td>
+                        <!-- Add other fields as needed -->
+                    </tr>
+                    <?php $index++; ?>
+                <?php endforeach; ?>
+            </table>
+
+
+
+            <!-- the footer start -->
+            <?php include 'common/footer/footer.php' ?>
+            <!-- the footer end -->
+
         </div>
- 
+    </div>
+
+
+    
+    </div>
+    </div>
+    
     <!--   Core JS Files   -->
     <script src="<?php echo base_url('assets/js/core/jquery-3.7.1.min.js')?>"></script>
     <script src="<?php echo base_url('assets/js/core/popper.min.js')?>"></script>
@@ -83,7 +109,4 @@
     <!-- Kaiadmin JS -->
     <script src="<?php echo base_url('assets/js/kaiadmin.min.js')?>"></script>
 
-
-
 </body>
-</html>

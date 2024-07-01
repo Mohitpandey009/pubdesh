@@ -34,6 +34,7 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/demo.css') ?>" />
+
     <style>
         body,
         html {
@@ -164,143 +165,108 @@
             }
         }
     </style>
-    <script>
-        function toggleDropdown() {
-            var content = document.getElementById('dropdown-content');
-            if (content.style.display === "flex") {
-                content.style.display = "none";
-            } else {
-                content.style.display = "flex";
-            }
-        }
-    </script>
+
 </head>
 
 <body>
-
-    <div class="wrapper">
-
-        <!-- the slider included -->
-        <?php include 'common/userslider/sideslider.php'; ?>
-        <!-- the slider included end-->
-
-        <div class="main-panel">
-
-            <!-- the header start-->
-            <?php include 'common/userheader/header.php'; ?>
-            <!-- the header end-->
-
-            <div class="container">
-                <div class="mainpaymentheading">
-                    <p>MONTH & YEAR</p>
-                    <p>INVOICE STATUS</p>
-                    <p>NET EARNINGS</p>
-                </div>
-                <div class="accordion" id="accordionExample">
+    <div class="main-panel">
+        <div class="container">
+            <div class="mainpaymentheading">
+                <p>MONTH & YEAR</p>
+                <p>INVOICE STATUS</p>
+                <p>NET EARNINGS</p>
+            </div>
+            <div class="accordion" id="accordionExample">
 
 
-                    <!-- Accordion Item #1 -->
-                    <?php foreach ($publisher_earn as $index => $earn):
-                        $totalpay = 0;
-                        $earnings = json_decode($earn['publisher_earn'], true); ?>
+                <!-- Accordion Item #1 -->
+                <?php foreach ($publisher_earn as $index => $earn):
+                    $totalpay = 0;
+                    $earnings = json_decode($earn['publisher_earn'], true); ?>
 
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="heading<?= $index ?>">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse<?= $index ?>" aria-expanded="false"
-                                    aria-controls="collapse<?= $index ?>">
-                                    <div class="heading" style="justify-content: space-between; display: flex; flex: 1;">
-                                        <h3><?= $earn['month'] ?>     <?= $earn['year'] ?></h3>
-                                        <h6><?php echo $earn['revenue'] > 0 ? 'Revenue Generated' : 'Not Revenue Generated'; ?>
-                                        </h6>
-                                        <h6>Earnings</h6>
-                                    </div>
-                                </button>
-                            </h2>
-                            <div id="collapse<?= $index ?>" class="accordion-collapse collapse"
-                                aria-labelledby="heading<?= $index ?>" data-bs-parent="#accordionExample">
-                                <?php foreach ($earnings as $earning): ?>
-                                    <div class="accordion-body" style="display: flex; justify-content: space-between; flex: 1;">
-                                        <p>Domain : <?= $earning['domain_id'] ?></p>
-
-
-                                        <p>$ <?php
-                                        $revenue = ($earning['pay_domain'] * $earn['revenue']) / 100;
-                                        echo $earning['pay_domain'] - $revenue;
-                                        $totalpay += $earning['pay_domain'] - $revenue;
-                                        ?></p>
-                                    </div>
-                                <?php endforeach; ?>
-                                <hr>
-                                <div class="heading">
-                                    <h3 style="font-weight: 900; padding: 0px 20px;">GROSS TOTAL</h3>
-                                    <div class="accordion-body"
-                                        style="display: flex; justify-content: space-between; flex: 1;">
-                                        <h5>Total</h5>
-                                        <p><?= $totalpay ?></p>
-                                    </div>
-                                    <div class="accordion-body"
-                                        style="display: flex; justify-content: space-between; flex: 1;">
-                                        <h5>Conversion Rate</h5>
-                                        <p>$ 1 = <?= $earn['conversionRate'] ?></p>
-                                    </div>
-                                    <div class="accordion-body"
-                                        style="display: flex; justify-content: space-between; flex: 1;">
-                                        <h5>Invalid Deduction</h5>
-                                        <p>$ <?= $earn['invalidDeduction'] ?></p>
-                                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading<?= $index ?>">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse<?= $index ?>" aria-expanded="false"
+                                aria-controls="collapse<?= $index ?>">
+                                <div class="heading" style="justify-content: space-between; display: flex; flex: 1;">
+                                    <h3><?= $earn['month'] ?>     <?= $earn['year'] ?></h3>
+                                    <h6><?php echo $earn['revenue'] > 0 ? 'Revenue Generated' : 'Not Revenue Generated'; ?>
+                                    </h6>
+                                    <h6>Earnings</h6>
                                 </div>
-                                <hr>
-                                <div class="totalheading">
-                                    <h3 style="font-weight: 900; padding: 0px 20px;">GRAND TOTAL</h3>
-                                    <div class="accordion-body"
-                                        style="display: flex; justify-content: space-between; flex: 1;">
-                                        <h5>Net Payment</h5>
-                                        <p>INR : <?= ($totalpay - $earn['invalidDeduction'])* $earn['conversionRate'] ?></p>
-                                    </div>
+                            </button>
+                        </h2>
+                        <div id="collapse<?= $index ?>" class="accordion-collapse collapse"
+                            aria-labelledby="heading<?= $index ?>" data-bs-parent="#accordionExample">
+                            <?php foreach ($earnings as $earning): ?>
+                                <div class="accordion-body" style="display: flex; justify-content: space-between; flex: 1;">
+                                    <p>Domain : <?= $earning['domain_id'] ?></p>
+                                    <p>$ <?php
+                                    $revenue = ($earning['pay_domain'] * $earn['revenue']) / 100;
+                                    echo $earning['pay_domain'] - $revenue;
+                                    $totalpay += $earning['pay_domain'] - $revenue;
+                                    ?></p>
+                                </div>
+                            <?php endforeach; ?>
+                            <hr>
+                            <div class="heading">
+                                <h3 style="font-weight: 900; padding: 0px 20px;">GROSS TOTAL</h3>
+                                <div class="accordion-body" style="display: flex; justify-content: space-between; flex: 1;">
+                                    <h5>Total</h5>
+                                    <p><?= $totalpay ?></p>
+                                </div>
+                                <div class="accordion-body" style="display: flex; justify-content: space-between; flex: 1;">
+                                    <h5>Conversion Rate</h5>
+                                    <p>$ 1 = <?= $earn['conversionRate'] ?></p>
+                                </div>
+                                <div class="accordion-body" style="display: flex; justify-content: space-between; flex: 1;">
+                                    <h5>Invalid Deduction</h5>
+                                    <p>$ <?= $earn['invalidDeduction'] ?></p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="totalheading">
+                                <h3 style="font-weight: 900; padding: 0px 20px;">GRAND TOTAL</h3>
+                                <div class="accordion-body" style="display: flex; justify-content: space-between; flex: 1;">
+                                    <h5>Net Payment</h5>
+                                    <p>INR : <?= ($totalpay - $earn['invalidDeduction']) * $earn['conversionRate'] ?>
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                    <?php endforeach; ?>
-                </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-
-            <!-- Bootstrap JS and dependencies -->
-            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-            <!--   Core JS Files   -->
-            <script src="<?php echo base_url('assets/js/core/jquery-3.7.1.min.js') ?>"></script>
-            <script src="<?php echo base_url('assets/js/core/popper.min.js') ?>"></script>
-            <script src="<?php echo base_url('assets/js/core/bootstrap.min.js') ?>"></script>
-
-            <!-- jQuery Scrollbar -->
-            <script src="<?php echo base_url('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') ?>"></script>
-
-            <!-- Chart JS -->
-            <script src="<?php echo base_url('assets/js/plugin/chart.js/chart.min.js') ?>"></script>
-
-            <!-- jQuery Sparkline -->
-            <script src="<?php echo base_url('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') ?>"></script>
-
-            <!-- Chart Circle -->
-            <script src="<?php echo base_url('assets/js/plugin/chart-circle/circles.min.js') ?>"></script>
-
-            <!-- Datatables -->
-            <script src="<?php echo base_url('assets/js/plugin/datatables/datatables.min.js') ?>"></script>
-
-            <!-- Bootstrap Notify -->
-
-            <!-- jQuery Vector Maps -->
-            <script src="<?php echo base_url('assets/js/plugin/jsvectormap/jsvectormap.min.js') ?>"></script>
-            <script src="<?php echo base_url('assets/js/plugin/jsvectormap/world.js') ?>"></script>
-
-            <!-- Sweet Alert -->
-            <script src="<?php echo base_url('assets/js/plugin/sweetalert/sweetalert.min.js') ?>"></script>
-
-
         </div>
+
+
+        <!--   Core JS Files   -->
+        <script src="<?php echo base_url('assets/js/core/jquery-3.7.1.min.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/core/popper.min.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/core/bootstrap.min.js') ?>"></script>
+
+        <!-- jQuery Scrollbar -->
+        <script src="<?php echo base_url('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') ?>"></script>
+
+        <!-- Chart JS -->
+        <script src="<?php echo base_url('assets/js/plugin/chart.js/chart.min.js') ?>"></script>
+
+        <!-- jQuery Sparkline -->
+        <script src="<?php echo base_url('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') ?>"></script>
+
+        <!-- Chart Circle -->
+        <script src="<?php echo base_url('assets/js/plugin/chart-circle/circles.min.js') ?>"></script>
+
+        <!-- Datatables -->
+        <script src="<?php echo base_url('assets/js/plugin/datatables/datatables.min.js') ?>"></script>
+
+        <!-- Kaiadmin JS -->
+        <script src="<?php echo base_url('assets/js/kaiadmin.min.js') ?>"></script>
+
+
     </div>
+
 </body>
 
 </html>

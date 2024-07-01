@@ -53,8 +53,8 @@
                     <img src="https://static.thenounproject.com/png/603655-200.png" alt="Logo">
                 </a>
             </div>
-            <a href="<?php echo base_url('pubroute_controller/index')?>" class="active">Login</a>
-            <a href="<?php echo base_url('pubroute_controller/userRegister')?>">Register</a>
+            <a href="<?php echo base_url('/')?>" class="active">Login</a>
+            <a href="<?php echo base_url('userRegister')?>">Register</a>
             <button class="icon" onclick="toggle()"><img
                     src="<?php echo base_url('assets/img/png-clipart-hamburger-button-computer-icons-marmon-keystone-canada-menu-red-sea-removebg-preview.png')?>"
                     alt=""></button>

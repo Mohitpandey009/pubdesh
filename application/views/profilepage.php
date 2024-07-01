@@ -37,18 +37,7 @@
 </head>
 
 <body>
-
-    <div class="wrapper">
-
-        <!-- Sidebar -->
-        <?php include 'common/userslider/sideslider.php'; ?>
-        <!-- End Sidebar -->
-
         <div class="main-panel">
-            <!-- header -->
-            <?php include 'common/userheader/header.php'; ?>
-            <!-- End header -->
-
             <div class="container mainprofilepage">
                 <?php
                 if ($this->session->flashdata('error')) {
@@ -107,7 +96,7 @@
             </div>
         </div>
 
-    </div>
+
     <!-- jQuery should be included before other scripts -->
     <script src="<?php echo base_url('assets/js/core/jquery-3.7.1.min.js') ?>"></script>
 
@@ -142,8 +131,29 @@
         }
     </script>   
 
+    
+    <!--   Core JS Files   -->
+    <script src="<?php echo base_url('assets/js/core/jquery-3.7.1.min.js')?>"></script>
+    <script src="<?php echo base_url('assets/js/core/popper.min.js')?>"></script>
+    <script src="<?php echo base_url('assets/js/core/bootstrap.min.js')?>"></script>
+
     <!-- jQuery Scrollbar -->
-    <script src="<?php echo base_url('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')?>"></script>
+
+    <!-- Chart JS -->
+    <script src="<?php echo base_url('assets/js/plugin/chart.js/chart.min.js')?>"></script>
+
+    <!-- jQuery Sparkline -->
+    <script src="<?php echo base_url('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js')?>"></script>
+
+    <!-- Chart Circle -->
+    <script src="<?php echo base_url('assets/js/plugin/chart-circle/circles.min.js')?>"></script>
+
+    <!-- Datatables -->
+    <script src="<?php echo base_url('assets/js/plugin/datatables/datatables.min.js')?>"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="<?php echo base_url('assets/js/kaiadmin.min.js')?>"></script>
 
 </body>
 

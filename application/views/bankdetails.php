@@ -38,16 +38,7 @@
 
 <body>
     <div class="wrapper">
-
-        <!-- the slider included start-->
-        <?php include 'common/userslider/sideslider.php'; ?>
-        <!-- the slider included end-->
-
         <div class="main-panel">
-
-            <!-- the header -->
-            <?php include 'common/userheader/header.php'; ?>
-            <!-- the header -->
 
             <div class="container">
                 <div class="mainheading">
@@ -245,14 +236,32 @@
                     });
                 });
             </script>
-            
-        </div>
-        <script src="<?php echo base_url('assets/js/core/jquery-3.7.1.min.js') ?>"></script>
-        <script src="<?php echo base_url('assets/js/core/popper.min.js') ?>"></script>
-        <script src="<?php echo base_url('assets/js/core/bootstrap.min.js') ?>"></script>
 
-        <!-- jQuery Scrollbar -->
-        <script src="<?php echo base_url('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') ?>"></script>
+        </div>
+        
+    <!--   Core JS Files   -->
+    <script src="<?php echo base_url('assets/js/core/jquery-3.7.1.min.js')?>"></script>
+    <script src="<?php echo base_url('assets/js/core/popper.min.js')?>"></script>
+    <script src="<?php echo base_url('assets/js/core/bootstrap.min.js')?>"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="<?php echo base_url('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')?>"></script>
+
+    <!-- Chart JS -->
+    <script src="<?php echo base_url('assets/js/plugin/chart.js/chart.min.js')?>"></script>
+
+    <!-- jQuery Sparkline -->
+    <script src="<?php echo base_url('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js')?>"></script>
+
+    <!-- Chart Circle -->
+    <script src="<?php echo base_url('assets/js/plugin/chart-circle/circles.min.js')?>"></script>
+
+    <!-- Datatables -->
+    <script src="<?php echo base_url('assets/js/plugin/datatables/datatables.min.js')?>"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="<?php echo base_url('assets/js/kaiadmin.min.js')?>"></script>
+
     </div>
 </body>
 

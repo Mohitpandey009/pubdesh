@@ -29,7 +29,7 @@
                     <div class="">
                         <ul class="nav-item">
                             <li>
-                                <a href="<?php echo base_url('Pubroute_controller/admindashboard') ?>">
+                                <a href="<?php echo base_url('authenticate/admindashboard') ?>">
                                     <span class="sub-item">Dashboard </span>
                                 </a>
                             </li>
@@ -38,7 +38,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="<?php echo base_url('Pubroute_controller/pendingrequest'); ?>">
+                    <a href="<?php echo base_url('authenticate/pendingrequest'); ?>">
                         <i class="fas fa-layer-group"></i>
                         <p>Panding Requests</p>
                     </a>

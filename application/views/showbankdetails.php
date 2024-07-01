@@ -39,9 +39,7 @@
 <body>
     <div class="wrapper">
 
-        <!-- the slider included -->
-        <?php include 'common/userslider/sideslider.php'; ?>
-        <!-- the slider included end-->
+
 
         <div class="main-panel">
 

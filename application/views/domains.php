@@ -37,88 +37,25 @@
 </head>
 
 <body>
+<div class="wrapper">
+<?php
+        $id = $this->uri->segment(3);
 
-    <!-- include the slider start -->
-    <div class="sidebar" data-background-color="dark">
-    <?php if (!empty($domain)): ?>
-    <div class="sidebar-logo">
-        <!-- Logo Header -->
-        <div class="logo-header" data-background-color="dark">
-            <a href="index.html" class="logo">
-                <img src="<?php echo base_url('assets/img/kaiadmin/logo_light.svg') ?>" alt="navbar brand" class="navbar-brand" height="20" />
-            </a>
-            <div class="nav-toggle">
-                <button class="btn btn-toggle toggle-sidebar">
-                    <i class="gg-menu-right"></i>
-                </button>
-                <button class="btn btn-toggle sidenav-toggler">
-                    <i class="gg-menu-left"></i>
-                </button>
-            </div>
-            <button class="topbar-toggler more">
-                <i class="gg-more-vertical-alt"></i>
-            </button>
-        </div>
-        <!-- End Logo Header -->
-    </div>
-    <div class="sidebar-wrapper scrollbar scrollbar-inner">
-        <div class="sidebar-content">
-            <ul class="nav nav-secondary">
-                <li class="nav-item active">
-                    <a href="<?php echo base_url('Pubroute_controller/userdashboard') ?>">
-                        <i class="fas fa-tachometer-alt"></i>
-                        <span class="sub-item">Dashboard</span>
-                    </a>
-                </li>
+        // Assuming $domain is your array of objects
+        $filteredData = [];
 
-                    <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#base">
-                                <i class="fas fa-globe"></i>
-                                <p>Domains</p>
-                                <span class="caret"></span>
-                            </a>
-                            <div class="collapse" id="base">
-                                <ul class="nav nav-collapse">
+        foreach ($domain as $item) {
+            if ($item->prop_id === $id) {
+                $filteredData[] = $item;
+            }
+        }
 
-                                <?php foreach ($domain as $d): ?>
-                                    <li>
-                                        <a href="<?php echo base_url('pubroute_controller/domains/') ?>">
-                                            <span class="sub-item"><?= $d->property;?></span>
-                                        </a>
-                                    </li>
-                                    <?php endforeach; ?>
-
-                                </ul>
-                            </div>
-                        </li>
-                <li class="nav-item">
-                    <a href="#">
-                        <i class="fas fa-file-alt"></i>
-                        <p>Reports</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?=base_url('pubroute_controller/userpayments')?>">
-                        <i class="fas fa-credit-card"></i>
-                        <p>Payments</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#">
-                        <i class="fas fa-file-invoice"></i>
-                        <p>Generate Invoice</p>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-    <!-- include the slider end -->
+        ?>
 
     <div class="main-panel">
 
         <!-- include the header start -->
-        <?php include 'common/userheader/header.php'; ?>
+       
         <!-- include the header end -->
 
         <div class="container">
@@ -133,7 +70,7 @@
                     </tr>
                     <?php $index = 1; ?>
 
-                    <?php foreach ($domain as $d): ?>
+                    <?php foreach ($filteredData as $d): ?>
                         <tr>
                             <td><?php echo $index; ?></td>
                             <td><?php echo $d->domain; ?></td>
@@ -142,15 +79,15 @@
                         <?php $index++; ?>
                     <?php endforeach; ?>
                 </table>
-            <?php else: ?>
-                <p>No domains found.</p>
-            <?php endif; ?>
+          
+          
 
             <!-- the footer start -->
             <?php include 'common/footer/footer.php' ?>
             <!-- the footer end -->
 
         </div>
+    </div>
     </div>
 
     <!-- Bootstrap JS and dependencies -->

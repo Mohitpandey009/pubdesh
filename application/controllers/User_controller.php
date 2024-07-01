@@ -22,7 +22,8 @@ class User_controller extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
             // If validation fails, reload the login view with errors
-            $this->load->view('createaccount');
+            // $this->load->view('createaccount');
+            redirect('userRegister');
         } else {
             $password = $this->input->post('password');
             $cpassword = $this->input->post('cpassword');
@@ -30,7 +31,6 @@ class User_controller extends CI_Controller
             if ($password === $cpassword) {
 
                 $enc_password = $this->encryption->encrypt($password);
-
 
                 $data = [
                     'name' => $this->input->post('name'),
@@ -40,7 +40,7 @@ class User_controller extends CI_Controller
                 ];
 
                 $this->User_model->saveregisteruser($data);
-                $this->load->view('userlogin');
+                redirect('/');
 
             } else {
                 $data['error'] = "password and confirmpassword not matched..";
@@ -63,8 +63,8 @@ class User_controller extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
             // If validation fails, reload the login view with errors
-            $this->load->view('userlogin');
-            // redirect('Pubroute_controller/userlogin');
+            // $this->load->view('userlogin');
+            redirect('/');
         } else {
             $email = $this->input->post('email');
             $password = $this->input->post('password');
@@ -90,7 +90,8 @@ class User_controller extends CI_Controller
 
 
                     // Redirect to the dashboard or some other page
-                    redirect('Pubroute_controller/userdashboard');
+                    redirect('userdashboard');
+                    // $this->load->view('userlogin');
                 } else {
                     // Set an error message and reload the login view
                     $data['error'] = 'Invalid email, password, or your account is not approved yet.';
@@ -181,7 +182,7 @@ class User_controller extends CI_Controller
 
                 $this->User_model->send_bankdetails($data);
 
-                redirect('Pubroute_controller/bankdetails');
+                redirect('bankdetails');
             } else {
                 $data['error'] = "accountNumber and confirmAccountNumber not matched..";
                 $this->load->view('bankdetails', $data);
@@ -195,7 +196,7 @@ class User_controller extends CI_Controller
         $user_id = $this->session->userdata('user_id');
         if (!$user_id) {
             $this->session->set_flashdata('error', 'You must be logged in to change your password.');
-            redirect('Pubroute_controller/profile'); // Redirect to the login page if the user is not logged in
+            redirect('profile'); // Redirect to the login page if the user is not logged in
             return ;
         }
     
@@ -203,7 +204,7 @@ class User_controller extends CI_Controller
         $data = $this->User_model->find_user_by_id($user_id);
         if (!$data) {
             $this->session->set_flashdata('error', 'User not found.');
-            redirect('Pubroute_controller/profile');
+            redirect('profile');
             return;
         }
     
@@ -222,7 +223,7 @@ class User_controller extends CI_Controller
             if ($oldPassword !== $dec_pass) {
               
                 $this->session->set_flashdata('error', 'Old password does not match.');
-                redirect('Pubroute_controller/profile');
+                redirect('profile');
                 return;
             }
     
@@ -233,12 +234,12 @@ class User_controller extends CI_Controller
             if ($this->User_model->reset_userpassword($user_id, $enc_password)) {
            
                 $this->session->set_flashdata('success', 'Password updated successfully.');
-                redirect('Pubroute_controller/profile');
+                redirect('profile');
                 return;
             } else {
           
                 $this->session->set_flashdata('error', 'Failed to update password.');
-                redirect('Pubroute_controller/profile');
+                redirect('profile');
                 return;
             }
             
@@ -247,7 +248,7 @@ class User_controller extends CI_Controller
         } else {
             // Form validation failed
             $this->session->set_flashdata('error', 'Form validation failed. Please fill all required fields.');
-            redirect('Pubroute_controller/profile');
+            redirect('profile');
         }
     }
   

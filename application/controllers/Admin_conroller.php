@@ -54,7 +54,7 @@ class Admin_conroller extends CI_Controller
                 $this->session->set_userdata($session_data);
 
                 // Redirect to a different page or load a success view
-                redirect('Pubroute_controller/admindashboard');
+                redirect('authenticate/admindashboard');
             } else {
                 // Set an error message and reload the login view
                 $data['error'] = 'Invalid username or password';
@@ -73,7 +73,7 @@ class Admin_conroller extends CI_Controller
         $this->session->sess_destroy();
 
         // Redirect to the login page
-        redirect('Pubroute_controller/adminlogin');
+        redirect('authenticate/adminlogin');
     }
 
     public function approve_publisher($publisher_id)
@@ -87,6 +87,7 @@ class Admin_conroller extends CI_Controller
             $this->Admin_model->approve_publisher($publisher_id, $user_id, $share);
         } else {
             $this->load->view('pendingrequest');
+            // redirect('authenticate/pendingrequest');
             
         }
 
